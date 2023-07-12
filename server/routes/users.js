@@ -16,15 +16,15 @@ const router = express.Router();
 //verifyToken will be a middleware
 router.put("/:id", veirifyToken, updateUser);
 //delete user
-router.delete("/:id", deleteUser);
+router.delete("/:id", veirifyToken, deleteUser);
 //get a user
 router.get("/find/:id", getUser);
 //subscribe a user
-router.put("/sub/:id", subscribe);
+router.put("/sub/:id", veirifyToken, subscribe);
 //unsubscribe a user
-router.put("/unsub/:id", unsubscribe);
+router.put("/unsub/:id", veirifyToken, unsubscribe);
 //like a video
-router.put("/like/:videoId", like);
+router.put("/like/:videoId", veirifyToken, like);
 //dislike a video
-router.put("/dislike/:videoId", dislike);
+router.put("/dislike/:videoId", veirifyToken, dislike);
 export default router;
