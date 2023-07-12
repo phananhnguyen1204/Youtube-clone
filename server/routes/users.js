@@ -8,7 +8,7 @@ import {
   unsubscribe,
   updateUser,
 } from "../controllers/user.js";
-import { getVideo } from "../controllers/video.js";
+
 import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
@@ -18,8 +18,8 @@ const router = express.Router();
 router.put("/:id", verifyToken, updateUser);
 //delete user
 router.delete("/:id", verifyToken, deleteUser);
-//get a user's video by ID
-router.get("/find/:id", getVideo);
+//get a user's by ID
+router.get("/find/:id", getUser);
 //subscribe a user
 router.put("/sub/:id", verifyToken, subscribe);
 //unsubscribe a user
