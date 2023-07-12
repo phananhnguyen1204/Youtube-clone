@@ -9,16 +9,16 @@ import {
   sub,
   trend,
 } from "../controllers/video.js";
-import { veirifyToken } from "../verifyToken.js";
+import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
 
 //create a video
-router.post("/", veirifyToken, addVideo);
+router.post("/", verifyToken, addVideo);
 //update video
-router.put("/:id", veirifyToken, addVideo);
+router.put("/:id", verifyToken, addVideo);
 //delete video
-router.delete("/", veirifyToken, addVideo);
+router.delete("/", verifyToken, addVideo);
 //get video by ID
 router.get("/find/:id", getVideo);
 //get view
@@ -28,7 +28,7 @@ router.get("/trend", trend);
 //get random video
 router.get("/random", random);
 //subscribed channel videos
-router.get("/sub", veirifyToken, sub);
+router.get("/sub", verifyToken, sub);
 //find video by tags
 router.get("/tags", getByTag);
 //find movie by title

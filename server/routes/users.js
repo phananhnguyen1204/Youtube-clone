@@ -8,23 +8,23 @@ import {
   unsubscribe,
   updateUser,
 } from "../controllers/user.js";
-import { veirifyToken } from "../verifyToken.js";
+import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
 
 //update user
 //verifyToken will be a middleware
-router.put("/:id", veirifyToken, updateUser);
+router.put("/:id", verifyToken, updateUser);
 //delete user
-router.delete("/:id", veirifyToken, deleteUser);
+router.delete("/:id", verifyToken, deleteUser);
 //get a user
 router.get("/find/:id", getUser);
 //subscribe a user
-router.put("/sub/:id", veirifyToken, subscribe);
+router.put("/sub/:id", verifyToken, subscribe);
 //unsubscribe a user
-router.put("/unsub/:id", veirifyToken, unsubscribe);
+router.put("/unsub/:id", verifyToken, unsubscribe);
 //like a video
-router.put("/like/:videoId", veirifyToken, like);
+router.put("/like/:videoId", verifyToken, like);
 //dislike a video
-router.put("/dislike/:videoId", veirifyToken, dislike);
+router.put("/dislike/:videoId", verifyToken, dislike);
 export default router;
