@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import { createError } from "../error.js";
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   try {
     //encrypt password
     const salt = bcrypt.genSaltSync(10);
@@ -12,6 +13,7 @@ export const signup = async (req, res) => {
     await newUser.save();
     res.status(200).json("User has been created");
   } catch (err) {
-    res.
+    // next(createError(404, "not found sorry"));
+    next(err);
   }
 };
