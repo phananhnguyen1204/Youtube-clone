@@ -32,11 +32,30 @@ export const deleteUser = async function (req, res, next) {
   }
 };
 
-export const getUser = async function (req, res, next) {};
+export const getUser = async function (req, res, next) {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
 
-export const subscribe = async function (req, res, next) {};
-export const unsubscribe = async function (req, res, next) {};
+export const subscribe = async function (req, res, next) {
+  try {
+  } catch (err) {}
+};
+export const unsubscribe = async function (req, res, next) {
+  try {
+  } catch (err) {}
+};
 
-export const like = async function (req, res, next) {};
+export const like = async function (req, res, next) {
+  try {
+  } catch (err) {}
+};
 
-export const dislike = async function (req, res, next) {};
+export const dislike = async function (req, res, next) {
+  try {
+  } catch (err) {}
+};
