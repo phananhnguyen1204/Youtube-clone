@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 
 function Home({ type }) {
+  //TODO: fix style when clicking to subscription
   const [videos, setVideos] = useState([]);
   useEffect(
     function () {
