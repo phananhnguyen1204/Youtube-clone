@@ -56,7 +56,16 @@ export const subscribe = async function (req, res, next) {
 };
 export const unsubscribe = async function (req, res, next) {
   try {
-  } catch (err) {}
+    await User.findById(req.user.id, {
+      $pull: { subscribedUser: req.params.id },
+    });
+    await User.findByIdAndUpdate(req.params.id, {
+      $inc: { subscribers: -1 },
+    });
+    res.status(200).json("Unsubscription successfull");
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const like = async function (req, res, next) {
