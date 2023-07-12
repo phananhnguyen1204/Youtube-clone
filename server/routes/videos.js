@@ -2,12 +2,14 @@ import express from "express";
 import {
   addVideo,
   addView,
+  deleteVideo,
   getByTag,
   getVideo,
   random,
   search,
   sub,
   trend,
+  updateVideo,
 } from "../controllers/video.js";
 import { verifyToken } from "../verifyToken.js";
 
@@ -16,9 +18,9 @@ const router = express.Router();
 //create a video
 router.post("/", verifyToken, addVideo);
 //update video
-router.put("/:id", verifyToken, addVideo);
+router.put("/:id", verifyToken, updateVideo);
 //delete video
-router.delete("/", verifyToken, addVideo);
+router.delete("/", verifyToken, deleteVideo);
 //get video by ID
 router.get("/find/:id", getVideo);
 //get view

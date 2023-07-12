@@ -1,5 +1,6 @@
 import { createError } from "../error.js";
 import User from "../models/User.js";
+import Video from "../models/Video.js";
 
 export const updateUser = async function (req, res, next) {
   if (req.params.id === req.user.id) {
@@ -72,6 +73,7 @@ export const unsubscribe = async function (req, res, next) {
 export const like = async (req, res, next) => {
   const id = req.user.id;
   const videoId = req.params.videoId;
+
   try {
     await Video.findByIdAndUpdate(videoId, {
       //add only one
