@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema(
     img: {
       type: String,
     },
+    //how many subscribers we have
     subscribers: {
       type: Number,
       default: 0,

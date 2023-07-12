@@ -1,4 +1,5 @@
 import { createError } from "../error.js";
+import User from "../models/User.js";
 import Video from "../models/Video.js";
 
 //CREATE NEW VIDEO
@@ -63,8 +64,10 @@ export const getVideo = async (req, res, next) => {
 //ADD VIEW
 export const addView = async (req, res, next) => {
   try {
-    const video = await Video.findById(req.params.id);
-    res.status(200).json(video);
+    await Video.findById(req.params.id, {
+      $inc: { views: 1 },
+    });
+    res.status(200).json("The view has been increased");
   } catch (err) {
     next(err);
   }
@@ -73,8 +76,9 @@ export const addView = async (req, res, next) => {
 //GET RANDOM VIDEO
 export const random = async (req, res, next) => {
   try {
-    const video = await Video.findById(req.params.id);
-    res.status(200).json(video);
+    //40 random videos
+    const videos = await Video.aggregate([{ $sample: { size: 1 } }]);
+    res.status(200).json(videos);
   } catch (err) {
     next(err);
   }
@@ -83,8 +87,9 @@ export const random = async (req, res, next) => {
 //GET TREND VIDEOS
 export const trend = async (req, res, next) => {
   try {
-    const video = await Video.findById(req.params.id);
-    res.status(200).json(video);
+    //get the most viewed videos
+    const videos = await Video.find().sort({ views: -1 });
+    res.status(200).json(videos);
   } catch (err) {
     next(err);
   }
@@ -93,8 +98,16 @@ export const trend = async (req, res, next) => {
 //GET SUBSCRIBED VIDEOS
 export const sub = async (req, res, next) => {
   try {
-    const video = await Video.findById(req.params.id);
-    res.status(200).json(video);
+    const user = await User.findById(req.user.id);
+    const subscribedChannels = user.subscribedUsers;
+
+    const list = await Promise.all(
+      subscribedChannels.map(async (channelId) => {
+        return await Video.find({ userId: channelId });
+      })
+    );
+
+    res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
   } catch (err) {
     next(err);
   }
